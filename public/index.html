@@ -191,10 +191,12 @@ async function generate() {
       method: "POST",
       headers: {"Content-Type":"application/json"},
       body: JSON.stringify({
-        header,
-        text,
-        sender: header
-      })
+  header,
+  text,
+  sender: header,
+  time,
+  date
+})
     });
 
     statusText.innerText = "Finalizing image...";
