@@ -26,8 +26,6 @@ let ready = false;
 // ORIGINAL CONFIG (TETAP 1:1)
 // ─────────────────────────────────────────────
 
-const DEBUG = false;
-
 const HEADER = {
   text: "Ditzzx",
   x: 543,
@@ -71,7 +69,7 @@ const INFO = {
 };
 
 // ─────────────────────────────────────────────
-// ASSET INIT (MEMORY ONLY)
+// INIT ASSET (MEMORY ONLY)
 // ─────────────────────────────────────────────
 
 async function downloadBuffer(url) {
@@ -95,7 +93,7 @@ async function init() {
 }
 
 // ─────────────────────────────────────────────
-// ORIGINAL FUNCTIONS (UNCHANGED)
+// SCRAPER CORE (UNCHANGED LOGIC)
 // ─────────────────────────────────────────────
 
 function drawHeaderText(ctx, cfg) {
@@ -176,7 +174,7 @@ function getFitFontSize(ctx, lines, cfg, maxH) {
 }
 
 // ─────────────────────────────────────────────
-// GENERATOR (FULL SCRAPER LOGIC)
+// GENERATOR (UPDATED INPUT SUPPORT)
 // ─────────────────────────────────────────────
 
 async function generateImage(data) {
@@ -188,10 +186,12 @@ async function generateImage(data) {
   const bg = await loadImage(bgBuffer);
   ctx.drawImage(bg, 0, 0, WIDTH, HEIGHT);
 
-  // HEADER
+  // ───────── HEADER DYNAMIC ─────────
+  HEADER.text = data.header || "Ditzzx";
+
   drawHeaderText(ctx, HEADER);
 
-  // PESAN
+  // ───────── PESAN ─────────
   PESAN.text = data.text || "";
 
   const rawLines = PESAN.text.split("\n");
@@ -223,10 +223,15 @@ async function generateImage(data) {
     );
   });
 
-  // INFO
-  const infoY = INFO.y;
+  // ───────── INFO DYNAMIC ─────────
+  const infoLines = [
+    "Dari:",
+    data.header || "-",
+    data.date || "-",
+    data.time || "-"
+  ];
 
-  const infoLines = ["Dari:", data.sender || "-", data.date || "", data.time || ""];
+  const infoY = INFO.y;
 
   infoLines.forEach((line, i) => {
     drawBodyText(
@@ -261,7 +266,7 @@ app.post("/api/generate", async (req, res) => {
   }
 });
 
-// ROOT → frontend
+// ROOT
 app.get("/", (req, res) => {
   res.sendFile(path.resolve("public/index.html"));
 });
