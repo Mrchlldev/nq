@@ -51,12 +51,17 @@ input, textarea {
   outline: none;
   font-family: 'Space Grotesk', sans-serif;
 }
+.blur-lock {
+  filter: blur(6px);
+  pointer-events: none;
+  user-select: none;
+}
 </style>
 </head>
 
 <body>
 
-<section class="min-h-screen px-6 py-12">
+<section id="mainContent" class="min-h-screen px-6 py-12">
 
   <div class="max-w-5xl mx-auto">
 
@@ -118,7 +123,29 @@ input, textarea {
   </div>
 
 </section>
+<!-- MODAL LOADING -->
+<div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
 
+  <div class="neo-card bg-[#ffcf33] rounded-[30px] p-8 max-w-md w-full text-center">
+
+    <div class="text-5xl mb-4 animate-bounce">⚙️</div>
+
+    <h1 class="title-font text-3xl">Generating Image</h1>
+
+    <p id="statusText" class="mt-4 font-medium">
+      Please wait...
+    </p>
+
+    <!-- loading bar -->
+    <div class="w-full h-5 border-4 border-black mt-6 bg-white overflow-hidden">
+      <div id="bar" class="h-full bg-black w-0 transition-all"></div>
+    </div>
+
+    <p id="percent" class="mt-3 font-bold">0%</p>
+
+  </div>
+
+</div>
 <script>
 function getAutoDateTime() {
   const now = new Date();
@@ -139,32 +166,69 @@ async function generate() {
   const header = document.getElementById("header").value;
   const text = document.getElementById("text").value;
 
-  const { date, time } = getAutoDateTime();
+  const modal = document.getElementById("modal");
+  const main = document.getElementById("mainContent");
+  const bar = document.getElementById("bar");
+  const percent = document.getElementById("percent");
+  const statusText = document.getElementById("statusText");
 
-  const res = await fetch("/api/generate", {
-    method: "POST",
-    headers: {"Content-Type":"application/json"},
-    body: JSON.stringify({
-      header,
-      text,
-      sender: header,
-      time,
-      date
-    })
-  });
+  // show modal
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  main.classList.add("blur-lock");
 
-  const blob = await res.blob();
-  const url = URL.createObjectURL(blob);
+  let p = 0;
+  const anim = setInterval(() => {
+    p = Math.min(p + 5, 90);
+    bar.style.width = p + "%";
+    percent.innerText = p + "%";
+  }, 150);
 
-  // preview
-  const img = document.getElementById("result");
-  img.src = url;
-  img.classList.remove("hidden");
+  try {
+    statusText.innerText = "Rendering canvas...";
 
-  // download
-  const dl = document.getElementById("downloadBtn");
-  dl.href = url;
-  dl.classList.remove("hidden");
+    const res = await fetch("/api/generate", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({
+        header,
+        text,
+        sender: header
+      })
+    });
+
+    statusText.innerText = "Finalizing image...";
+
+    const blob = await res.blob();
+    const url = URL.createObjectURL(blob);
+
+    clearInterval(anim);
+    bar.style.width = "100%";
+    percent.innerText = "100%";
+
+    const img = document.getElementById("result");
+    img.src = url;
+    img.classList.remove("hidden");
+
+    const dl = document.getElementById("downloadBtn");
+    if (dl) {
+      dl.href = url;
+      dl.classList.remove("hidden");
+    }
+
+    setTimeout(() => {
+      modal.classList.add("hidden");
+      main.classList.remove("blur-lock");
+    }, 500);
+
+  } catch (err) {
+    console.log(err);
+    alert("Gagal generate!");
+    modal.classList.add("hidden");
+    main.classList.remove("blur-lock");
+  }
+
+  clearInterval(anim);
 }
 </script>
 
