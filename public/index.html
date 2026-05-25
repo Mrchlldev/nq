@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Nokia Quote Generator</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+
+<style>
+body {
+  font-family: Poppins;
+  background: #0a0a0a;
+  color: white;
+}
+.pixel {
+  font-family: "Press Start 2P";
+}
+.neo {
+  border: 4px solid #fff;
+  box-shadow: 6px 6px 0 #ff00ff;
+}
+</style>
+</head>
+
+<body class="p-6">
+
+<h1 class="pixel text-2xl mb-6">NOKIA QUOTE GENERATOR</h1>
+
+<!-- INPUT CARD -->
+<div class="neo bg-black p-4 mb-6">
+  <h2 class="pixel text-sm mb-3">INPUT</h2>
+
+  <input id="text" class="w-full p-2 text-black mb-2" placeholder="Tulis quote..." />
+  <input id="sender" class="w-full p-2 text-black mb-2" placeholder="Sender" />
+
+  <button onclick="generate()" class="pixel bg-pink-500 p-3 w-full mt-2">
+    GENERATE
+  </button>
+</div>
+
+<!-- RESULT -->
+<div class="neo bg-black p-4 mb-6">
+  <h2 class="pixel text-sm mb-3">RESULT</h2>
+  <img id="result" class="w-full hidden"/>
+</div>
+
+<!-- FEATURE CARDS -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+
+  <div class="neo p-3 bg-black">
+    <h3 class="pixel text-xs mb-2">PIXEL STYLE</h3>
+    <p class="text-sm">Neo brutalism game UI</p>
+  </div>
+
+  <div class="neo p-3 bg-black">
+    <h3 class="pixel text-xs mb-2">NOKIA FONT</h3>
+    <p class="text-sm">Retro 3310 vibes</p>
+  </div>
+
+  <div class="neo p-3 bg-black">
+    <h3 class="pixel text-xs mb-2">AUTO WRAP</h3>
+    <p class="text-sm">Text otomatis rapi</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="neo p-4 bg-black text-center">
+  <p class="pixel text-xs">DEVELOPER: DITZZX</p>
+</div>
+
+<script>
+async function generate() {
+  const text = document.getElementById("text").value;
+  const sender = document.getElementById("sender").value;
+
+  const res = await fetch("/api/generate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      text,
+      sender,
+      date: "25/05/2026",
+      time: new Date().toLocaleTimeString()
+    })
+  });
+
+  const data = await res.json();
+
+  const img = document.getElementById("result");
+  img.src = data.url;
+  img.classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
