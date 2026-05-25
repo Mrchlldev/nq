@@ -150,10 +150,7 @@ input, textarea {
 function getAutoDateTime() {
   const now = new Date();
 
-  // format tanggal: DD/MM/YYYY
   const date = now.toLocaleDateString("id-ID");
-
-  // format jam: HH:MM
   const time = now.toLocaleTimeString("id-ID", {
     hour: "2-digit",
     minute: "2-digit"
@@ -172,7 +169,9 @@ async function generate() {
   const percent = document.getElementById("percent");
   const statusText = document.getElementById("statusText");
 
-  // show modal
+  // auto date & time FIX
+  const { date, time } = getAutoDateTime();
+
   modal.classList.remove("hidden");
   modal.classList.add("flex");
   main.classList.add("blur-lock");
@@ -191,12 +190,12 @@ async function generate() {
       method: "POST",
       headers: {"Content-Type":"application/json"},
       body: JSON.stringify({
-  header,
-  text,
-  sender: header,
-  time,
-  date
-})
+        header,
+        text,
+        sender: header,
+        date,
+        time
+      })
     });
 
     statusText.innerText = "Finalizing image...";
@@ -213,10 +212,8 @@ async function generate() {
     img.classList.remove("hidden");
 
     const dl = document.getElementById("downloadBtn");
-    if (dl) {
-      dl.href = url;
-      dl.classList.remove("hidden");
-    }
+    dl.href = url;
+    dl.classList.remove("hidden");
 
     setTimeout(() => {
       modal.classList.add("hidden");
@@ -233,6 +230,5 @@ async function generate() {
   clearInterval(anim);
 }
 </script>
-
 </body>
 </html>
