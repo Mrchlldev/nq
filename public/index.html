@@ -68,25 +68,14 @@ input, textarea {
 
     <!-- INPUT -->
     <div class="neo-card rounded-[30px] p-8 mb-8">
-
       <h2 class="title-font text-xl mb-5">INPUT DATA</h2>
-
-      <input id="header" placeholder="Nama Header (contoh: Ditzzx)" class="mb-3"/>
-      
+      <input id="header" placeholder="Nama Header (contoh: mrcl)" class="mb-3"/>
       <textarea id="text" rows="5" placeholder="Isi teks quote..." class="mb-3"></textarea>
-
-      <div class="grid grid-cols-2 gap-3">
-        <input id="time" placeholder="Jam (contoh: 11:28)"/>
-        <input id="date" placeholder="Tanggal (contoh: 25/05/2026)"/>
-      </div>
-
       <button onclick="generate()" class="neo-btn w-full mt-5 bg-black text-white py-4 font-bold">
         GENERATE IMAGE
       </button>
-
     </div>
 
-    <!-- RESULT -->
     <!-- RESULT -->
 <div class="neo-card rounded-[30px] p-8 mb-8">
   <h2 class="title-font text-xl mb-5">RESULT</h2>
@@ -123,7 +112,7 @@ input, textarea {
 
     <!-- FOOTER -->
     <div class="neo-card p-6 text-center rounded-[20px]">
-      <div class="title-font text-sm">DEVELOPER: DITZZX</div>
+      <div class="title-font text-sm">Made with ❤️‍🔥 by Marcellino F.A</div>
     </div>
 
   </div>
@@ -131,11 +120,26 @@ input, textarea {
 </section>
 
 <script>
+function getAutoDateTime() {
+  const now = new Date();
+
+  // format tanggal: DD/MM/YYYY
+  const date = now.toLocaleDateString("id-ID");
+
+  // format jam: HH:MM
+  const time = now.toLocaleTimeString("id-ID", {
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+
+  return { date, time };
+}
+
 async function generate() {
   const header = document.getElementById("header").value;
   const text = document.getElementById("text").value;
-  const time = document.getElementById("time").value;
-  const date = document.getElementById("date").value;
+
+  const { date, time } = getAutoDateTime();
 
   const res = await fetch("/api/generate", {
     method: "POST",
