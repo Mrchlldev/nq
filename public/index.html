@@ -79,21 +79,22 @@ async function generate() {
   const sender = document.getElementById("sender").value;
 
   const res = await fetch("/api/generate", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      text,
-      sender,
-      date: "25/05/2026",
-      time: new Date().toLocaleTimeString()
-    })
-  });
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    text,
+    sender,
+    date: "25/05/2026",
+    time: new Date().toLocaleTimeString()
+  })
+});
 
-  const data = await res.json();
+const blob = await res.blob();
+const url = URL.createObjectURL(blob);
 
-  const img = document.getElementById("result");
-  img.src = data.url;
-  img.classList.remove("hidden");
+const img = document.getElementById("result");
+img.src = url;
+img.classList.remove("hidden");
 }
 </script>
 
