@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
 
@@ -23,8 +23,9 @@ body {
     radial-gradient(circle at 10% 90%, #000 0 90px, transparent 90px);
 }
 
-.title-font { font-family: 'Archivo Black', sans-serif; }
-.pixel { font-family: "Press Start 2P"; }
+.title-font {
+  font-family: 'Archivo Black', sans-serif;
+}
 
 .neo-card {
   border: 4px solid black;
@@ -48,6 +49,7 @@ input, textarea {
   padding: 10px;
   width: 100%;
   outline: none;
+  font-family: 'Space Grotesk', sans-serif;
 }
 </style>
 </head>
@@ -60,15 +62,14 @@ input, textarea {
 
     <!-- TITLE -->
     <div class="neo-card rounded-[30px] bg-[#ffcf33] p-8 mb-8">
-      <div class="pixel text-sm mb-3">NOKIA QUOTE</div>
-      <h1 class="title-font text-5xl">GENERATOR ✨</h1>
-      <p class="mt-3 font-medium">Neo Brutalism Pixel Style Quote Maker</p>
+      <h1 class="title-font text-5xl">NOKIA QUOTE GENERATOR</h1>
+      <p class="mt-3 font-medium">Neo Brutalism Quote Maker</p>
     </div>
 
-    <!-- INPUT CARD -->
+    <!-- INPUT -->
     <div class="neo-card rounded-[30px] p-8 mb-8">
 
-      <h2 class="pixel text-sm mb-5">INPUT DATA</h2>
+      <h2 class="title-font text-xl mb-5">INPUT DATA</h2>
 
       <input id="header" placeholder="Nama Header (contoh: Ditzzx)" class="mb-3"/>
       
@@ -79,41 +80,50 @@ input, textarea {
         <input id="date" placeholder="Tanggal (contoh: 25/05/2026)"/>
       </div>
 
-      <button onclick="generate()" class="neo-btn w-full mt-5 bg-black text-white py-4 font-black">
+      <button onclick="generate()" class="neo-btn w-full mt-5 bg-black text-white py-4 font-bold">
         GENERATE IMAGE
       </button>
 
     </div>
 
     <!-- RESULT -->
-    <div class="neo-card rounded-[30px] p-8 mb-8">
-      <h2 class="pixel text-sm mb-5">RESULT</h2>
-      <img id="result" class="w-full hidden border-4 border-black"/>
-    </div>
+    <!-- RESULT -->
+<div class="neo-card rounded-[30px] p-8 mb-8">
+  <h2 class="title-font text-xl mb-5">RESULT</h2>
 
-    <!-- FEATURE -->
+  <img id="result" class="w-full hidden border-4 border-black"/>
+
+  <!-- DOWNLOAD BUTTON -->
+  <a id="downloadBtn"
+     class="neo-btn w-full mt-5 bg-black text-white py-4 font-bold text-center block hidden"
+     download="nokia-quote.png">
+    DOWNLOAD IMAGE
+  </a>
+</div>
+
+    <!-- FEATURES -->
     <div class="grid md:grid-cols-3 gap-6 mb-10">
 
       <div class="neo-card p-5 rounded-[20px]">
-        <h3 class="pixel text-xs mb-2">PIXEL STYLE</h3>
-        <p>Retro Nokia aesthetic</p>
+        <h3 class="title-font text-sm mb-2">PIXEL-FREE DESIGN</h3>
+        <p>Clean brutalist UI</p>
       </div>
 
       <div class="neo-card p-5 rounded-[20px]">
-        <h3 class="pixel text-xs mb-2">AUTO WRAP</h3>
-        <p>Text rapi otomatis</p>
+        <h3 class="title-font text-sm mb-2">AUTO WRAP TEXT</h3>
+        <p>Text rapi & responsif</p>
       </div>
 
       <div class="neo-card p-5 rounded-[20px]">
-        <h3 class="pixel text-xs mb-2">NEO BRUTAL</h3>
-        <p>UI modern + bold shadow</p>
+        <h3 class="title-font text-sm mb-2">NOKIA STYLE ENGINE</h3>
+        <p>Canvas generator backend</p>
       </div>
 
     </div>
 
     <!-- FOOTER -->
     <div class="neo-card p-6 text-center rounded-[20px]">
-      <div class="pixel text-xs">DEVELOPER: DITZZX</div>
+      <div class="title-font text-sm">DEVELOPER: DITZZX</div>
     </div>
 
   </div>
@@ -142,9 +152,15 @@ async function generate() {
   const blob = await res.blob();
   const url = URL.createObjectURL(blob);
 
+  // preview
   const img = document.getElementById("result");
   img.src = url;
   img.classList.remove("hidden");
+
+  // download
+  const dl = document.getElementById("downloadBtn");
+  dl.href = url;
+  dl.classList.remove("hidden");
 }
 </script>
 
