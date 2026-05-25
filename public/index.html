@@ -1,299 +1,305 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Nokia Quote Generator</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Nokia Quote Generator</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@300;400;500;700&display=swap"
+            rel="stylesheet"
+        />
 
-<script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
 
-<style>
-body {
-  font-family: 'Space Grotesk', sans-serif;
-  background: #ffe9c9;
-  background-image:
-    radial-gradient(circle at 10% 20%, #ff7a00 0 130px, transparent 130px),
-    radial-gradient(circle at 90% 10%, #ffffff 0 100px, transparent 100px),
-    radial-gradient(circle at 90% 90%, #ff2d55 0 120px, transparent 120px),
-    radial-gradient(circle at 10% 90%, #000 0 90px, transparent 90px);
-}
+        <style>
+            body {
+                font-family: "Space Grotesk", sans-serif;
+                background: #ffe9c9;
+                background-image:
+                    radial-gradient(
+                        circle at 10% 20%,
+                        #ff7a00 0 130px,
+                        transparent 130px
+                    ),
+                    radial-gradient(
+                        circle at 90% 10%,
+                        #ffffff 0 100px,
+                        transparent 100px
+                    ),
+                    radial-gradient(
+                        circle at 90% 90%,
+                        #ff2d55 0 120px,
+                        transparent 120px
+                    ),
+                    radial-gradient(
+                        circle at 10% 90%,
+                        #000 0 90px,
+                        transparent 90px
+                    );
+            }
 
-.title-font {
-  font-family: 'Archivo Black', sans-serif;
-}
+            .title-font {
+                font-family: "Archivo Black", sans-serif;
+            }
 
-.neo-card {
-  border: 4px solid black;
-  box-shadow: 8px 8px 0px black;
-  background: white;
-}
+            .neo-card {
+                border: 4px solid black;
+                box-shadow: 8px 8px 0px black;
+                background: white;
+            }
 
-.neo-btn {
-  border: 4px solid black;
-  box-shadow: 6px 6px 0px black;
-  transition: .2s ease;
-}
+            .neo-btn {
+                border: 4px solid black;
+                box-shadow: 6px 6px 0px black;
+                transition: 0.2s ease;
+            }
 
-.neo-btn:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 10px 10px 0px black;
-}
+            .neo-btn:hover {
+                transform: translate(-2px, -2px);
+                box-shadow: 10px 10px 0px black;
+            }
 
-input, textarea {
-  border: 3px solid black;
-  padding: 10px;
-  width: 100%;
-  outline: none;
-  font-family: 'Space Grotesk', sans-serif;
-}
-.blur-lock {
-  filter: blur(6px);
-  pointer-events: none;
-  user-select: none;
-}
-.neo-input {
-  border: 4px solid black;
-  box-shadow: 6px 6px 0px black;
-  outline: none;
-  transition: .2s ease;
-  background: white;
-}
+            input,
+            textarea {
+                border: 3px solid black;
+                padding: 10px;
+                width: 100%;
+                outline: none;
+                font-family: "Space Grotesk", sans-serif;
+            }
+            .blur-lock {
+                filter: blur(6px);
+                pointer-events: none;
+                user-select: none;
+            }
+            .neo-input {
+                border: 4px solid black;
+                box-shadow: 6px 6px 0px black;
+                outline: none;
+                transition: 0.2s ease;
+                background: white;
+            }
 
-.neo-input:focus {
-  transform: translate(-2px, -2px);
-  box-shadow: 10px 10px 0px black;
-}
+            .neo-input:focus {
+                transform: translate(-2px, -2px);
+                box-shadow: 10px 10px 0px black;
+            }
 
-.badge {
-  border: 3px solid black;
-  box-shadow: 4px 4px 0px black;
-}
-</style>
-</head>
+            .badge {
+                border: 3px solid black;
+                box-shadow: 4px 4px 0px black;
+            }
+        </style>
+    </head>
 
-<body>
+    <body>
+        <section id="mainContent" class="min-h-screen px-6 py-12">
+            <div class="max-w-5xl mx-auto">
+                <!-- TITLE -->
+                <div class="neo-card rounded-[30px] bg-[#ffcf33] p-8 mb-8">
+                    <h1 class="title-font text-5xl">NOKIA QUOTE GENERATOR</h1>
+                    <p class="mt-3 font-medium">
+                        Buat Quotes dengan Background Nokia Jadul
+                    </p>
+                </div>
 
-<section id="mainContent" class="min-h-screen px-6 py-12">
+                <!-- INPUT -->
+                <!-- INPUT -->
+                <div class="neo-card rounded-[30px] p-8 mb-8">
+                    <h2 class="title-font text-xl mb-5">INPUT DATA</h2>
 
-  <div class="max-w-5xl mx-auto">
+                    <div class="flex flex-col md:flex-row gap-5">
+                        <!-- LEFT INPUT -->
+                        <div class="flex-1 flex flex-col gap-4">
+                            <input
+                                id="header"
+                                type="text"
+                                placeholder="Nama Header (contoh: mrcl)"
+                                class="neo-input rounded-2xl px-5 py-4 text-lg font-bold"
+                            />
 
-    <!-- TITLE -->
-    <div class="neo-card rounded-[30px] bg-[#ffcf33] p-8 mb-8">
-      <h1 class="title-font text-5xl">NOKIA QUOTE GENERATOR</h1>
-      <p class="mt-3 font-medium">Buat Quotes dengan Background Nokia Jadul</p>
-    </div>
+                            <textarea
+                                id="text"
+                                rows="8"
+                                placeholder="Isi teks quote..."
+                                class="neo-input rounded-2xl px-5 py-4 text-lg font-bold resize-none"
+                            ></textarea>
+                        </div>
 
-    <!-- INPUT -->
-    <!-- INPUT -->
-<div class="neo-card rounded-[30px] p-8 mb-8">
-  <h2 class="title-font text-xl mb-5">INPUT DATA</h2>
+                        <!-- RIGHT ACTION -->
+                        <div class="w-full md:w-[240px] flex flex-col gap-4">
+                            <button
+                                onclick="generate()"
+                                class="neo-btn bg-black text-white rounded-2xl px-8 py-5 font-black text-lg w-full"
+                            >
+                                ⚡ GENERATE
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-  <div class="flex flex-col md:flex-row gap-5">
+                <!-- RESULT -->
+                <div class="neo-card rounded-[30px] p-8 mb-8">
+                    <h2 class="title-font text-xl mb-5">RESULT</h2>
 
-    <!-- LEFT INPUT -->
-    <div class="flex-1 flex flex-col gap-4">
+                    <img
+                        id="result"
+                        class="w-full hidden border-4 border-black"
+                    />
 
-      <input
-        id="header"
-        type="text"
-        placeholder="Nama Header (contoh: mrcl)"
-        class="neo-input rounded-2xl px-5 py-4 text-lg font-bold"
-      />
+                    <!-- DOWNLOAD BUTTON -->
+                    <a
+                        id="downloadBtn"
+                        class="neo-btn w-full mt-5 bg-black text-white py-4 font-bold text-center block hidden"
+                        download="nokia-quote.png"
+                    >
+                        DOWNLOAD IMAGE
+                    </a>
+                </div>
 
-      <textarea
-        id="text"
-        rows="8"
-        placeholder="Isi teks quote..."
-        class="neo-input rounded-2xl px-5 py-4 text-lg font-bold resize-none"
-      ></textarea>
+                <!-- FEATURES -->
+                <div class="grid md:grid-cols-3 gap-6 mb-10">
+                    <div class="neo-card p-5 rounded-[20px]">
+                        <h3 class="title-font text-sm mb-2">
+                            PIXEL-FREE DESIGN
+                        </h3>
+                        <p>Clean brutalist UI</p>
+                    </div>
 
-    </div>
+                    <div class="neo-card p-5 rounded-[20px]">
+                        <h3 class="title-font text-sm mb-2">AUTO WRAP TEXT</h3>
+                        <p>Text rapi & responsif</p>
+                    </div>
 
-    <!-- RIGHT ACTION -->
-    <div class="w-full md:w-[240px] flex flex-col gap-4">
+                    <div class="neo-card p-5 rounded-[20px]">
+                        <h3 class="title-font text-sm mb-2">
+                            NOKIA STYLE ENGINE
+                        </h3>
+                        <p>Canvas generator backend</p>
+                    </div>
+                </div>
 
-      <div class="neo-card bg-[#ffcf33] rounded-[25px] p-5">
+                <!-- FOOTER -->
+                <div class="neo-card p-6 text-center rounded-[20px]">
+                    <div class="title-font text-sm">
+                        Made with ❤️‍🔥 by Marcellino F.A
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- MODAL LOADING -->
+        <div
+            id="modal"
+            class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm"
+        >
+            <div
+                class="neo-card bg-[#ffcf33] rounded-[30px] p-8 max-w-md w-full text-center"
+            >
+                <div class="text-5xl mb-4 animate-bounce">⚙️</div>
 
-        <div class="inline-block badge bg-white px-3 py-1 rounded-full text-sm font-black mb-4">
-          NOKIA ENGINE
+                <h1 class="title-font text-3xl">Generating Image</h1>
+
+                <p id="statusText" class="mt-4 font-medium">Please wait...</p>
+
+                <!-- loading bar -->
+                <div
+                    class="w-full h-5 border-4 border-black mt-6 bg-white overflow-hidden"
+                >
+                    <div
+                        id="bar"
+                        class="h-full bg-black w-0 transition-all"
+                    ></div>
+                </div>
+
+                <p id="percent" class="mt-3 font-bold">0%</p>
+            </div>
         </div>
+        <script>
+            function getAutoDateTime() {
+                const now = new Date();
 
-        <h3 class="title-font text-2xl leading-tight">
-          Generate Quote
-        </h3>
+                const date = now.toLocaleDateString("id-ID");
+                const time = now.toLocaleTimeString("id-ID", {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                });
 
-        <p class="mt-3 font-medium">
-          Buat gambar Nokia style secara otomatis.
-        </p>
+                return { date, time };
+            }
 
-      </div>
+            async function generate() {
+                const header = document.getElementById("header").value;
+                const text = document.getElementById("text").value;
 
-      <button
-        onclick="generate()"
-        class="neo-btn bg-black text-white rounded-2xl px-8 py-5 font-black text-lg w-full"
-      >
-        ⚡ GENERATE
-      </button>
+                const modal = document.getElementById("modal");
+                const main = document.getElementById("mainContent");
+                const bar = document.getElementById("bar");
+                const percent = document.getElementById("percent");
+                const statusText = document.getElementById("statusText");
 
-    </div>
+                // auto date & time FIX
+                const { date, time } = getAutoDateTime();
 
-  </div>
+                modal.classList.remove("hidden");
+                modal.classList.add("flex");
+                main.classList.add("blur-lock");
 
-</div>
+                let p = 0;
+                const anim = setInterval(() => {
+                    p = Math.min(p + 5, 90);
+                    bar.style.width = p + "%";
+                    percent.innerText = p + "%";
+                }, 150);
 
-    <!-- RESULT -->
-<div class="neo-card rounded-[30px] p-8 mb-8">
-  <h2 class="title-font text-xl mb-5">RESULT</h2>
+                try {
+                    statusText.innerText = "Rendering canvas...";
 
-  <img id="result" class="w-full hidden border-4 border-black"/>
+                    const res = await fetch("/api/generate", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            header,
+                            text,
+                            sender: header,
+                            date,
+                            time
+                        })
+                    });
 
-  <!-- DOWNLOAD BUTTON -->
-  <a id="downloadBtn"
-     class="neo-btn w-full mt-5 bg-black text-white py-4 font-bold text-center block hidden"
-     download="nokia-quote.png">
-    DOWNLOAD IMAGE
-  </a>
-</div>
+                    statusText.innerText = "Finalizing image...";
 
-    <!-- FEATURES -->
-    <div class="grid md:grid-cols-3 gap-6 mb-10">
+                    const blob = await res.blob();
+                    const url = URL.createObjectURL(blob);
 
-      <div class="neo-card p-5 rounded-[20px]">
-        <h3 class="title-font text-sm mb-2">PIXEL-FREE DESIGN</h3>
-        <p>Clean brutalist UI</p>
-      </div>
+                    clearInterval(anim);
+                    bar.style.width = "100%";
+                    percent.innerText = "100%";
 
-      <div class="neo-card p-5 rounded-[20px]">
-        <h3 class="title-font text-sm mb-2">AUTO WRAP TEXT</h3>
-        <p>Text rapi & responsif</p>
-      </div>
+                    const img = document.getElementById("result");
+                    img.src = url;
+                    img.classList.remove("hidden");
 
-      <div class="neo-card p-5 rounded-[20px]">
-        <h3 class="title-font text-sm mb-2">NOKIA STYLE ENGINE</h3>
-        <p>Canvas generator backend</p>
-      </div>
+                    const dl = document.getElementById("downloadBtn");
+                    dl.href = url;
+                    dl.classList.remove("hidden");
 
-    </div>
+                    setTimeout(() => {
+                        modal.classList.add("hidden");
+                        main.classList.remove("blur-lock");
+                    }, 500);
+                } catch (err) {
+                    console.log(err);
+                    alert("Gagal generate!");
+                    modal.classList.add("hidden");
+                    main.classList.remove("blur-lock");
+                }
 
-    <!-- FOOTER -->
-    <div class="neo-card p-6 text-center rounded-[20px]">
-      <div class="title-font text-sm">Made with ❤️‍🔥 by Marcellino F.A</div>
-    </div>
-
-  </div>
-
-</section>
-<!-- MODAL LOADING -->
-<div id="modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
-
-  <div class="neo-card bg-[#ffcf33] rounded-[30px] p-8 max-w-md w-full text-center">
-
-    <div class="text-5xl mb-4 animate-bounce">⚙️</div>
-
-    <h1 class="title-font text-3xl">Generating Image</h1>
-
-    <p id="statusText" class="mt-4 font-medium">
-      Please wait...
-    </p>
-
-    <!-- loading bar -->
-    <div class="w-full h-5 border-4 border-black mt-6 bg-white overflow-hidden">
-      <div id="bar" class="h-full bg-black w-0 transition-all"></div>
-    </div>
-
-    <p id="percent" class="mt-3 font-bold">0%</p>
-
-  </div>
-
-</div>
-<script>
-function getAutoDateTime() {
-  const now = new Date();
-
-  const date = now.toLocaleDateString("id-ID");
-  const time = now.toLocaleTimeString("id-ID", {
-    hour: "2-digit",
-    minute: "2-digit"
-  });
-
-  return { date, time };
-}
-
-async function generate() {
-  const header = document.getElementById("header").value;
-  const text = document.getElementById("text").value;
-
-  const modal = document.getElementById("modal");
-  const main = document.getElementById("mainContent");
-  const bar = document.getElementById("bar");
-  const percent = document.getElementById("percent");
-  const statusText = document.getElementById("statusText");
-
-  // auto date & time FIX
-  const { date, time } = getAutoDateTime();
-
-  modal.classList.remove("hidden");
-  modal.classList.add("flex");
-  main.classList.add("blur-lock");
-
-  let p = 0;
-  const anim = setInterval(() => {
-    p = Math.min(p + 5, 90);
-    bar.style.width = p + "%";
-    percent.innerText = p + "%";
-  }, 150);
-
-  try {
-    statusText.innerText = "Rendering canvas...";
-
-    const res = await fetch("/api/generate", {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({
-        header,
-        text,
-        sender: header,
-        date,
-        time
-      })
-    });
-
-    statusText.innerText = "Finalizing image...";
-
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-
-    clearInterval(anim);
-    bar.style.width = "100%";
-    percent.innerText = "100%";
-
-    const img = document.getElementById("result");
-    img.src = url;
-    img.classList.remove("hidden");
-
-    const dl = document.getElementById("downloadBtn");
-    dl.href = url;
-    dl.classList.remove("hidden");
-
-    setTimeout(() => {
-      modal.classList.add("hidden");
-      main.classList.remove("blur-lock");
-    }, 500);
-
-  } catch (err) {
-    console.log(err);
-    alert("Gagal generate!");
-    modal.classList.add("hidden");
-    main.classList.remove("blur-lock");
-  }
-
-  clearInterval(anim);
-}
-</script>
-</body>
+                clearInterval(anim);
+            }
+        </script>
+    </body>
 </html>
